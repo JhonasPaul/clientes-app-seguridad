@@ -1,0 +1,23 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.titulo {
+  font-size:27px;
+}
+
+.header {
+  padding: 50px;
+}
+.span{
+  margin-bottom:20px;
+  font-size: 17px;
+}
+
+.boton {
+  margin-left: 80px;
+  margin-top: 20px;
+
+}
+
+

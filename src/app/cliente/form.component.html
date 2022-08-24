@@ -1,0 +1,74 @@
+<br>
+<!-- @Valid [2], traemos al lista de form.component.ts -->
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+{{err}}
+  </li>
+</ul>
+<div class="card bg-dark text-white">
+  <div class="card-header">Clientes</div>
+  <div class="card-body">
+    <!--usamos un ngIf para unir el boton de create y actualziar
+    para eso quitamos el (ngSubmit)="create()" de aqui-->
+    <form><!-- deshabilitar button[1] agregar #clienteForm="ngForm", ir a los botons de abajo y agregar el [disable] -->
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2" >Nombre: </label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre"> <!--required minlength="4" #nombre="ngModel"-->
+                <!-- <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              Nombre es requerido
+            </div>
+            <div *ngIf="nombre.errors.minlength">
+              Nombre debe tener al menos 4 caracteres
+            </div>
+          </div> -->
+        </div>
+      </div>
+<br>
+      <div class="form-group row">
+        <label for="apellido" class="col-form-label col-sm-2">Apellido: </label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido">
+        </div>
+      </div>
+<br>
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">Email:</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email">
+        </div>
+      </div>
+<br>
+
+<div class="form-group row">
+  <label for="createAt" class="col-form-label col-sm-2" >Fecha: </label>
+  <div class="col-sm-6">
+    <input type="date" class="form-control" [(ngModel)]="cliente.createAt" name="createAt">
+  </div>
+</div>
+<br>
+<!-- Regiones[6] -->
+<div class="form-group row">
+  <label for="region" class="col-form-label col-sm-2" >Region: </label>
+  <div class="col-sm-6">
+    <select [compareWith]="compararRegion"  class="form-select" [(ngModel)]="cliente.region" name="region" style="width:500px;">
+      <option [ngValue]="undefined">--- seleccionar una region ---</option>
+      <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-sm-6">
+    <button class="btn btn-primary" role="button"  *ngIf="!cliente.id else elseBlock" (click)="crearCliente()" >Crear</button>
+    <ng-template #elseBlock>
+      <button class="btn btn-primary" role="button" (click)="actualizarCliente()" >Editar</button>
+    </ng-template>
+  </div>
+</div>
+
+    </form>
+  </div>
+</div>

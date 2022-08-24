@@ -1,0 +1,60 @@
+<!-- MODAL[5] -->
+<!-- tambien colocamos  *ngIf="modalService.modal" para que se cierre el modal completamente-->
+<div class="abrir-modal animacion fadeIn " *ngIf="modalService.modal">
+
+
+  <!-- MODAL[5] agregar el ngIf, poner el evento cerrarModal en los dot sbotones|   ir a: detallecomponent.css-->
+<div *ngIf="modalService.modal"  class="modal conDetalle" tabindex="-1" style="display:block;">
+  <!--MODAL[5] agregar modal-lg para agrandar modal -->
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle del Cliente<</h5>
+        <button type="button" (click)="cerrarModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm detalle">
+              <!-- para evitar el error de asincrono -->
+              <ul *ngIf="cliente" class="list-group text-dark mb-3">
+
+                <li class="list-group-item active">{{cliente.nombre}}</li>
+                <li class="list-group-item">{{cliente.apellido}}</li>
+                <li class="list-group-item">{{cliente.email}}</li>
+                <li class="list-group-item">{{cliente.createAt}}</li>
+                <!-- REGION[3] hsata aca se visualiza la region en el detalle ir a cliente.service.ts-->
+                <li class="list-group-item">{{cliente.region.nombre}}</li>
+              </ul>
+
+              <div class="input-group">
+                <!--subirfoto[4] (change) obtener el archibo y lo asignamos a la iamgen selccionada  | hasta aca se puede sibrar la subida de foto en al vista -->
+                <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button"
+                  id="inputGroupFileAddon04">Subir Foto</button>
+              </div>
+            </div>
+            <div class="col-sm">
+ <!-- este ngIf es para que funcione la validacion   cliente inyectado en detalle.component.ts       la ruta del metodo verFoto del back-->      <!-- IMAGEN[1] copíar y pegar en  -- cliente.component.html -->
+              <img *ngIf="cliente?.foto" src="http://localhost:8085/api/uploads/img/{{cliente.foto}}" alt="{{cliente.foto}}"
+                class="img-thumbnail rounded">
+              <img   *ngIf="!cliente?.foto" src="http://localhost:8085/images/no-usuario.png"
+                    alt="Sin Foto"class="img-thumbnail rounded img" >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="cerrarModal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- verificar el app.module.ts que detallecomponent este importado --- app.module-ts -->
+
+
+
